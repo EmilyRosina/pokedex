@@ -26,7 +26,6 @@
           <template v-if="extraDataloaded">
             <el-col class="pokemon-sprite" v-for="(sprite, index, key) in sprites" :key="index">
               <img :src="sprite" />
-              {{ key }}
             </el-col>
           </template>
           <template v-else>
@@ -84,7 +83,17 @@
         return this.$store.getters.pokemonById(this.pokemonId)
       },
       sprites () {
-        return this.pokemon.data ? this.pokemon.data.sprites : null
+        if (this.pokemon.data.sprites) {
+          let sprites = {}
+          for (const i in this.pokemon.data.sprites) {
+            if (this.pokemon.data.sprites[i] !== null) {
+              sprites[i] = this.pokemon.data.sprites[i]
+            }
+          }
+          return sprites
+        } else {
+          return null
+        }
       }
     },
     watch: {
