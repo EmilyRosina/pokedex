@@ -1,10 +1,12 @@
 <template>
   <results-layout>
     <el-row v-if="loaded" type="flex" class="pokemon-content-wrapper">
-      <el-col :span="8">
-        <el-col class="pokemon-cards">Cards to go here</el-col>
+      <el-col :span="9">
+        <el-col class="pokemon-cards">
+          <img :src="cardShowing" class="pokemon-card" v-if="cardDataloaded"/>
+        </el-col>
       </el-col>
-      <el-col :span="16" class="flex-col">
+      <el-col :span="15" class="flex-col">
         <el-row type="flex">
           <el-col><h1 class="pokemon-name">{{ pokemon.name }}</h1></el-col>
           <el-col><h3 class="pokemon-id"># {{ pokemon.id }}</h3></el-col>
@@ -94,13 +96,12 @@
         } else {
           return null
         }
-      }
-    },
-    watch: {
-      extraDataloaded (loaded) {
-        if (!loaded) {
-          console.log('GET THE EXTRA DATA!')
-        }
+      },
+      cardShowing () {
+        return this.cards[0].imageUrlHiRes
+      },
+      cards () {
+        return this.pokemon.cardData ? this.pokemon.cardData.cards : null
       }
     }
   }
@@ -152,6 +153,9 @@
       align-items: center;
       justify-content: center;
       display: flex;
+      .pokemon-card {
+        height: 100%;
+      }
     }
     &-sprites {
       overflow: hidden;
@@ -168,5 +172,8 @@
         align-items: center;
       }
     }
+  }
+  .el-carousel__item, .el-carousel__mask {
+    position: relative;
   }
 </style>
