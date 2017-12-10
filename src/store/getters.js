@@ -1,19 +1,19 @@
-const json = true
+// const json = true
 
-const POKEAPI = (param) => { return json ? `../../static/json/pokeapi/${param}.json` : `https://pokeapi.co/api/v2/${param}` }
-const TCGAPI = (param) => { return json ? `../../static/json/tcg/${param}.json` : `https://api.pokemontcg.io/v1/${param}` }
+const POKEAPI = (param, json = true) => { return json ? `../../static/json/pokeapi/${param}.json` : `https://pokeapi.co/api/v2/${param}` }
+const TCGAPI = (param, json = true) => { return json ? `../../static/json/tcg/${param}.json` : `https://api.pokemontcg.io/v1/${param}` }
 
 export default {
   api () {
     return {
+      tcg: {
+        pokemonById: (id) => { return TCGAPI(`cards?nationalPokedexNumber=${id}`, false) }
+      },
       pokeapi: {
         generationById: (id) => { return POKEAPI(`generation/${id}`) },
-        pokemonById: (id) => { return POKEAPI(`pokemon/${id}`) },
-        pokemonSpeciesById: (id) => { return POKEAPI(`pokemon-species/${id}`) },
+        pokemonById: (id) => { return POKEAPI(`pokemon/${id}`, false) },
+        pokemonSpeciesById: (id) => { return POKEAPI(`pokemon-species/${id}`, false) },
         typeById: (id) => { return POKEAPI(`type/${id}`) }
-      },
-      tgc: {
-        pokemonById: (state) => (id) => { return `${TCGAPI}cards?nationalPokedexNumber=${id}` }
       }
     }
   },

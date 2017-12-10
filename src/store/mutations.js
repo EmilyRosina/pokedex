@@ -12,8 +12,7 @@ export default {
         images: {
           main: `/src/assets/images/pokemon/${imageId}.png`,
           sprites: {}
-        },
-        cardData: {}
+        }
       }
       Vue.set(state.pokedex, pokemon.name, pokemonData)
     }
@@ -40,17 +39,16 @@ export default {
 
   // ADD
   add_pokemon_data (state, payload) {
-    Object.asssign(state.pokedex[payload.pokemonId], payload.data)
+    Vue.set(state.pokedex[payload.name], 'data', payload.data)
   },
 
   add_types_data (state, payload) {
     state.types[payload.typeId].class = payload.data.class
     state.types[payload.typeId].damage = payload.data.damage
     state.types[payload.typeId].pokemon = payload.data.pokemon
-    // Vue.set(state.types[typeData.typeId], '', typeData)
   },
   add_pokemon_card_data (state, payload) {
-    Vue.set(state.pokedex[payload.pokemonId], 'cardData', payload.data)
+    Vue.set(state.pokedex[payload.name], 'cardData', payload.data)
   },
 
   // CLEAR

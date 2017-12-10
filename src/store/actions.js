@@ -24,10 +24,10 @@ export default {
       console.error(error)
     })
   },
-  ADD_POKEMON_DATA ({ commit, getters }, id) {
-    axios.get(getters.api.pokeapi.pokemonById(id))
+  ADD_POKEMON_DATA ({ commit, getters }, payload) {
+    axios.get(getters.api.pokeapi.pokemonById(payload.id))
       .then(response => {
-        commit('add_types_data', { pokemonId: id, data: response.data })
+        commit('add_pokemon_data', { name: payload.name, data: response.data })
       })
       .catch(error => {
         console.error(error)
@@ -66,10 +66,11 @@ export default {
         console.error(error)
       })
   },
-  ADD_CARD_DATA ({ commit, getters }, id) {
-    axios.get(getters.api.tcg.pokemonById(id))
+  ADD_CARD_DATA ({ commit, getters }, payload) {
+    console.log('ADD_CARD_DATA', getters.api.tcg.pokemonById(payload.id))
+    axios.get(getters.api.tcg.pokemonById(payload.id))
       .then(response => {
-        commit('add_pokemon_card_data', { pokemonId: id, data: response.data })
+        commit('add_pokemon_card_data', { name: payload.name, data: response.data })
       })
       .catch(error => {
         console.error(error)

@@ -32,7 +32,7 @@
 <style lang="scss" scoped>
   .el-header {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: space-between;
     .el-button {
       width: 10em;
