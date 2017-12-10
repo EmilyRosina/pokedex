@@ -1,16 +1,32 @@
 <template>
   <search-layout>
-    <el-row>
-      <el-button @click="goToRandomPokemon">Random</el-button>
-      <el-button @click="setMode('name')">By Name</el-button>
-      <el-button @click="setMode('type')">By Type</el-button>
-    </el-row>
-    <el-row>
-      <el-col v-if="mode === 'name'">
-        <el-row type="flex">
-          <el-input v-model.trim="searchParams.name" @keyup.native="setPokemonName"></el-input>
+    <el-row type="flex" class="search-controls">
+      <el-col :span="24" style="padding-bottom: 9em; margin-top: -2em;">
+        <el-row>
+          <el-button @click="goToRandomPokemon" type="warning" plain round>Random</el-button>
         </el-row>
-        <ul class="pokemon-links" v-if="searching && nameHasMatches">
+        <el-row>
+          <el-button @click="setMode('name')" type="primary" plain round>By Name</el-button>
+          <el-button @click="setMode('type')" type="success" plain round>By Type</el-button>
+        </el-row>
+      </el-col>
+      <el-col>
+        <el-row>
+          <el-input v-model.trim="searchParams.name" @keyup.native="setPokemonName" v-if="mode === 'name'"></el-input>
+          <el-select v-model="searchParams.type" placeholder="Select" @change="setPokemonType" v-if="mode === 'type'">
+            <el-option
+              v-for="item in typeOptions"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
+            </el-option>
+          </el-select>
+        </el-row>
+      </el-col>
+    </el-row>
+    <el-row type="flex" style="flex: 1 1 auto;">
+      <el-col>
+        <ul v-if="mode === 'name' && searching && nameHasMatches" class="pokemon-links">
           <li
             v-for="(match, key) of matched_onName.matches"
             :key="key"
@@ -19,17 +35,7 @@
             {{ key }}
           </li>
         </ul>
-      </el-col>
-      <el-col v-if="mode === 'type'">
-        <el-select v-model="searchParams.type" placeholder="Select" @change="setPokemonType">
-          <el-option
-            v-for="item in typeOptions"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value">
-          </el-option>
-        </el-select>
-        <ul class="pokemon-links" v-if="searching && typeHasMatches">
+        <ul v-else-if="mode === 'type' && typeHasMatches" class="pokemon-links">
           <li
             v-for="(match, key) of matched_onType.matches"
             :key="key"
@@ -118,16 +124,78 @@
 </script>
 
 <style lang="scss" scoped>
+  .search-controls {
+    .el-input,
+    .el-select {
+      width: 60%;
+    }
+    flex-wrap: wrap;
+    min-height: 400px;
+    height: 400px;
+    width: 400px;
+    align-content: center;
+    justify-content: center;
+    background: url('~/src/assets/images/pokeball.png');
+    background-size: cover;
+    .el-button {
+      margin: 0.25rem;
+    }
+  }
+
   .pokemon-links {
+    width: 20em;
+    max-height: 20em;
     list-style: none;
     padding-left: 0;
+    overflow-y: auto;
+    padding: 0 1em;
     .pokemon-link {
+      &:first-child {
+        margin-top: 0;
+      }
+      &:last-child {
+        margin-bottom: 0;
+      }
       margin: 0.75em 0;
       cursor: pointer;
       background-color: indianred;
       padding: 0.5em;
       color: white;
       text-transform: capitalize;
+      &:hover, &:active {
+        background-color: #FF3838;
+      }
     }
+    &::-webkit-scrollbar-track {
+      -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.25);
+      border-radius: 10px;
+      background-color: rgba(0,0,0,0);
+    }
+    &::-webkit-scrollbar {
+      width: 12px;
+      background-color: rgba(0,0,0,0);
+    }
+    &::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+      background-color: white;
+    }
+  }
+
+</style>
+
+<style lang="scss">
+  .el-input__inner {
+    border: none;
+    background: #bbb;
+    color: #333;
+    text-align: center;
+  }
+  .el-button.is-plain {
+    background: none;
+    color: white;
+    border: 1px solid rgba(0,0,0,0.1);
+    background: rgba(0,0,0,0.05);
+    box-shadow: inset 0 0 3px rgba(0,0,0,0.075);
   }
 </style>
