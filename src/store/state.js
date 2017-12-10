@@ -1,10 +1,12 @@
 export default {
   searchParams: {
     name: '',
-    type: null,
-    weakness: null,
-    strength: null
+    type: 0,
+    weakness: 0,
+    strength: 0
   },
-  pokedex: null,
-  types: null
+  pokedex: {},
+  types: {},
+  generationId: 1,
+  generation: null
 }

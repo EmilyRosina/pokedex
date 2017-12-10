@@ -14,15 +14,36 @@ export default {
       },
       tgc: {
         pokemonById: (state) => (id) => { return `${TCGAPI}cards?nationalPokedexNumber=${id}` }
-    }
+      }
     }
   },
   pokemonById: (state) => (id) => {
-    return state.pokedex ? state.pokedex.find(pokemon => pokemon.id === id) : null
+    return state.pokedex ? Object.values(state.pokedex).find(pokemon => pokemon.id === id) : null
   },
   pokemonImageById: (state) => (id) => {
-    id = id.toString()
-    id = id.padStart(3, '0')
     return `/src/assets/images/pokemon/${id}.png`
+  },
+  types (state) {
+    return state.types
+  },
+  matched_onName: (state) => () => {
+    let matchedNames
+    let pokemon = {}
+    if (state.pokedex) {
+      matchedNames = Object.keys(state.pokedex).filter(pokemon => pokemon.includes(state.searchParams.name))
+      for (const match of matchedNames) {
+        pokemon[match] = state.pokedex[match]
+      }
+    }
+    return state.pokedex ? {
+      total: matchedNames.length,
+      matches: pokemon
+    } : null
+  },
+  matched_onType: (state) => () => {
+    return state.types ? {
+      total: Object.keys(state.types[state.searchParams.type].pokemon).length,
+      matches: state.types[state.searchParams.type].pokemon
+    } : null
   }
 }

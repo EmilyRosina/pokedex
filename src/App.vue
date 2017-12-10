@@ -6,7 +6,10 @@
 
 <script>
 export default {
-  name: 'app'
+  name: 'app',
+  mounted () {
+    this.$store.dispatch('GET_POKEDEX', this.$store.state.generationId)
+  }
 }
 </script>
 
