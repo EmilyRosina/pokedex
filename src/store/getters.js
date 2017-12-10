@@ -26,22 +26,22 @@ export default {
   types (state) {
     return state.types
   },
-  matched_onName: (state) => () => {
+  matched_onName (state) {
     let matchedNames
     let pokemon = {}
-    if (state.pokedex) {
+    if (state.pokedex && state.searchParams.name.length >= 3) {
       matchedNames = Object.keys(state.pokedex).filter(pokemon => pokemon.includes(state.searchParams.name))
       for (const match of matchedNames) {
         pokemon[match] = state.pokedex[match]
       }
     }
-    return state.pokedex ? {
+    return state.pokedex && state.searchParams.name.length >= 3 ? {
       total: matchedNames.length,
       matches: pokemon
     } : null
   },
-  matched_onType: (state) => () => {
-    return state.types ? {
+  matched_onType (state) {
+    return state.types && state.searchParams.type !== 0 ? {
       total: Object.keys(state.types[state.searchParams.type].pokemon).length,
       matches: state.types[state.searchParams.type].pokemon
     } : null

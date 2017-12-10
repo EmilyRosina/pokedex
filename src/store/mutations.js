@@ -31,6 +31,12 @@ export default {
       Vue.set(state.types, id, typeData)
     }
   },
+  set_search_name (state, name) {
+    Vue.set(state.searchParams, 'name', name)
+  },
+  set_search_type (state, typeId) {
+    Vue.set(state.searchParams, 'type', typeId)
+  },
 
   // ADD
   add_pokemon_data (state, payload) {
@@ -45,5 +51,13 @@ export default {
   },
   add_pokemon_card_data (state, payload) {
     Vue.set(state.pokedex[payload.pokemonId], 'cardData', payload.data)
+  },
+
+  // CLEAR
+  clear_search (state) {
+    Vue.set(state.searchParams, 'name', '')
+    Vue.set(state.searchParams, 'type', '')
+    Vue.set(state.searchParams, 'strength', '')
+    Vue.set(state.searchParams, 'weakness', '')
   }
 }
