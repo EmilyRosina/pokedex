@@ -3,6 +3,7 @@
     <el-row>
       <el-col>
         Pokemon! #{{ pokemonId }}
+        <img :src="pokemonImage" />
       </el-col>
 
     </el-row>
@@ -19,6 +20,9 @@
     computed: {
       pokemonId () {
         return this.$route.params.id
+      },
+      pokemonImage () {
+        return this.$store.getters.pokemonImageById(this.pokemonId)
       }
     }
   }

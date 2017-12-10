@@ -9,5 +9,11 @@ export default {
   },
   pokemonById: (state) => (id) => {
     return state.pokedex ? state.pokedex.find(pokemon => pokemon.id === id) : null
+  },
+  pokemonImageById: (state) => (id) => {
+    id = id.toString()
+    id = id.padStart(3, '0')
+    console.log(id)
+    return `/src/assets/images/pokemon/${id}.png`
   }
 }
