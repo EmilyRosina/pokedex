@@ -185,11 +185,15 @@
 </style>
 
 <style lang="scss">
-  .el-input__inner {
-    border: none;
-    background: #bbb;
-    color: #333;
-    text-align: center;
+  *:not(.el-select) {
+    >.el-input {
+      >.el-input__inner {
+        border: none;
+        background: #bbb;
+        color: #333;
+        text-align: center;
+      }
+    }
   }
   .el-button.is-plain {
     background: none;
