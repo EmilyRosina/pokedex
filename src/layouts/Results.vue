@@ -8,7 +8,7 @@
       <!-- CONTENT -->
       <slot></slot>
     </el-main>
-    <el-footer>4uroraSkye &copy; {{ new Date().getFullYear()}}</el-footer>
+    <el-footer>EmilyRosina &copy; {{ new Date().getFullYear()}}</el-footer>
   </el-container>
 </template>
 
