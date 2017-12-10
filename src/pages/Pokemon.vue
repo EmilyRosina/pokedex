@@ -52,6 +52,14 @@
         this.$store.dispatch('ADD_CARD_DATA', { id: this.pokemonId, name: this.pokemon.name })
       }
     },
+    updated () {
+      if (!this.extraDataloaded && this.pokemon) {
+        this.$store.dispatch('ADD_POKEMON_DATA', { id: this.pokemonId, name: this.pokemon.name })
+      }
+      if (!this.cardDataloaded && this.pokemon) {
+        this.$store.dispatch('ADD_CARD_DATA', { id: this.pokemonId, name: this.pokemon.name })
+      }
+    },
     components: {
       resultsLayout
     },

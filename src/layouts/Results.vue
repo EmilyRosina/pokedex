@@ -19,6 +19,8 @@
         this.commit('CLEAR_SEARCH')
       },
       goToRandomPokemon () {
+        // this.$destroy()
+        console.log(this)
         let randomId = Math.floor(Math.random() * (151) + 1)
         this.$router.push({ params: { id: randomId } })
       },
