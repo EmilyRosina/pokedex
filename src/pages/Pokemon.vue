@@ -1,9 +1,9 @@
 <template>
   <results-layout>
     <el-row>
-      <el-col>
+      <el-col v-if="loaded">
         Pokemon! #{{ pokemonId }}
-        <img :src="pokemonImage" />
+        <img :src="pokemon.images.main" />
       </el-col>
 
     </el-row>
@@ -18,11 +18,18 @@
       resultsLayout
     },
     computed: {
-      pokemonId () {
-        return this.$route.params.id
+      loaded () {
+        if (this.pokemon) {
+          return true
+        } else {
+          return false
+        }
       },
-      pokemonImage () {
-        return this.$store.getters.pokemonImageById(this.pokemonId)
+      pokemonId () {
+        return Number(this.$route.params.id)
+      },
+      pokemon () {
+        return this.$store.getters.pokemonById(this.pokemonId)
       }
     }
   }
