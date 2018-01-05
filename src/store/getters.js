@@ -1,7 +1,20 @@
 // const json = true
 
-const POKEAPI = (param, json = true) => { return json ? `../../static/json/pokeapi/${param}.json` : `https://pokeapi.co/api/v2/${param}` }
-const TCGAPI = (param, json = true) => { return json ? `../../static/json/tcg/${param}.json` : `https://api.pokemontcg.io/v1/${param}` }
+const POKEAPI = (param, json = true) => {
+  return json
+  ? `static/json/pokeapi/${param}.json`
+  : `https://pokeapi.co/api/v2/${param}`
+}
+const TCGAPI = (param, json = true) => {
+  return json
+  ? `static/json/tcg/${param}.json`
+  : `https://api.pokemontcg.io/v1/${param}`
+}
+/* taken from webpack.base.config */
+const path = require('path')
+function resolve (dir) {
+  return path.join(__dirname, '..', dir)
+}
 
 export default {
   api () {
@@ -21,7 +34,8 @@ export default {
     return state.pokedex ? Object.values(state.pokedex).find(pokemon => pokemon.id === id) : null
   },
   pokemonImageById: (state) => (id) => {
-    return `/src/assets/images/pokemon/${id}.png`
+    id = id.toString().length !== 3 ? id.toString().padStart(3, '0') : id.toString()
+    return resolve(`src/assets/img/pokemon/${id}.png`)
   },
   types (state) {
     return state.types

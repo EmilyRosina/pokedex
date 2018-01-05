@@ -10,7 +10,7 @@ export default {
         id,
         name: pokemon.name,
         images: {
-          main: `/src/assets/images/pokemon/${imageId}.png`,
+          main: `src/assets/img/pokemon/${imageId}.png`,
           sprites: {}
         }
       }

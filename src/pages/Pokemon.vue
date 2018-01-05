@@ -22,7 +22,7 @@
             </template>
           </el-col>
           <el-col :span="8" class="flex-col">
-            <img :src="pokemon.images.main" class="pokemon-main-image"/>
+            <img :src="pokemonImage" class="pokemon-main-image"/>
           </el-col>
         </el-row>
         <el-row type="flex" class="pokemon-sprites" >
@@ -86,6 +86,9 @@
       },
       pokemon () {
         return this.$store.getters.pokemonById(this.pokemonId)
+      },
+      pokemonImage () {
+        return this.$store.getters.pokemonImageById(this.pokemonId)
       },
       sprites () {
         if (this.pokemon.data.sprites) {

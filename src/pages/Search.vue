@@ -52,7 +52,7 @@
 <script>
   import searchLayout from '@/layouts/Search.vue'
   import { mapGetters } from 'vuex'
-  import pokeball from '@/assets/images/pokeball.png'
+  import pokeball from '@/assets/img/pokeball.png'
 
   export default {
     data () {
@@ -139,7 +139,7 @@
     width: 400px;
     align-content: center;
     justify-content: center;
-    // background: url('~/src/assets/images/pokeball.png');
+    // background: url('~/src/assets/img/pokeball.png');
     background-size: cover;
     .el-button {
       margin: 0.25rem;
