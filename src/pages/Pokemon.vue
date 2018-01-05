@@ -3,7 +3,8 @@
     <el-row v-if="loaded" type="flex" class="pokemon-content-wrapper">
       <el-col :span="9">
         <el-col class="pokemon-cards">
-          <img :src="cardShowing" class="pokemon-card" v-if="cardDataloaded"/>
+          <!-- <img :src="cardShowing" class="pokemon-card" v-if="cardDataloaded"/> -->
+          <card-carousel :cards="cards" v-if="cardDataloaded"></card-carousel>
         </el-col>
       </el-col>
       <el-col :span="15" class="flex-col">
@@ -26,7 +27,7 @@
         </el-row>
         <el-row type="flex" class="pokemon-sprites" >
           <template v-if="extraDataloaded">
-            <el-col class="pokemon-sprite" v-for="(sprite, index, key) in sprites" :key="index">
+            <el-col class="pokemon-sprite" v-for="(sprite, index) in sprites" :key="index">
               <img :src="sprite" />
             </el-col>
           </template>
@@ -43,6 +44,7 @@
 
 <script>
   import resultsLayout from '@/layouts/Results'
+  import cardCarousel from '@/components/cardCarousel'
 
   export default {
     mounted () {
@@ -62,7 +64,8 @@
       }
     },
     components: {
-      resultsLayout
+      resultsLayout,
+      cardCarousel
     },
     computed: {
       loaded () {
