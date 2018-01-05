@@ -155,6 +155,7 @@
       display: flex;
       .pokemon-card {
         height: 100%;
+        object-fit: contain;
       }
     }
     &-sprites {
