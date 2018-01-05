@@ -32,7 +32,8 @@
       }
       &:nth-child(2n+1),
       &:nth-child(2n) {
-        background-color: rgba(255,255,255,0) !important;
+        background: none !important;
+        background-color: none !important;
       }
       &--card {
         width: auto;
@@ -43,11 +44,12 @@
         &.is-active {
           transform: translateX(1.6em) scale(1) !important;
           width: 82.5%;
-          background-color: rgba(255,255,255,1) !important;
           height: auto;
           bottom: 0;
           img {
             height: 100%;
+            width: auto;
+            opacity: 1;
           }
         }
       }
