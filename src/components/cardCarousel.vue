@@ -33,7 +33,7 @@
       &:nth-child(2n+1),
       &:nth-child(2n) {
         background: none !important;
-        background-color: none !important;
+        background-color: transparent !important;
       }
       &--card {
         width: auto;
