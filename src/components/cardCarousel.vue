@@ -21,6 +21,7 @@
 <style lang="scss">
   .el-carousel {
     height: 100%;
+    width: 100%;
     &__container {
       height: 90% !important;
     }

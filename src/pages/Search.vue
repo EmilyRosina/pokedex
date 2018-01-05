@@ -1,6 +1,6 @@
 <template>
   <search-layout>
-    <el-row type="flex" class="search-controls">
+    <el-row type="flex" class="search-controls" :style="{background: `url(${pokeball})`, backgroundSize: 'cover'}">
       <el-col :span="24" style="padding-bottom: 9em; margin-top: -2em;">
         <el-row>
           <el-button @click="goToRandomPokemon" type="warning" plain round>Random</el-button>
@@ -52,6 +52,7 @@
 <script>
   import searchLayout from '@/layouts/Search.vue'
   import { mapGetters } from 'vuex'
+  import pokeball from '@/assets/images/pokeball.png'
 
   export default {
     data () {
@@ -71,6 +72,9 @@
         'matched_onName',
         'matched_onType'
       ]),
+      pokeball () {
+        return pokeball
+      },
       randomId () {
         return Math.floor(Math.random() * (151) + 1)
       },
@@ -135,7 +139,7 @@
     width: 400px;
     align-content: center;
     justify-content: center;
-    background: url('~/src/assets/images/pokeball.png');
+    // background: url('~/src/assets/images/pokeball.png');
     background-size: cover;
     .el-button {
       margin: 0.25rem;
