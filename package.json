@@ -11,7 +11,7 @@
     "build": "node build/build.js && vcg"
   },
   "dependencies": {
-    "axios": "^0.17.1",
+    "axios": "^0.18.1",
     "babel-polyfill": "^6.26.0",
     "element-ui": "^2.2.1",
     "vue": "^2.5.15",
